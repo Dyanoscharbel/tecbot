@@ -3,573 +3,748 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TEKBOT Robotics Challenge 2025 - Documentation</title>
+    <title>TEKBOT Robotics Challenge 2025 - IFRI Team Excellence</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <!-- Theme toggle button -->
-    <div class="theme-toggle" id="themeToggle">
-        <span class="theme-toggle-icon" id="themeIcon">🌙</span>
+<body class="loading">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-container">
+            <div class="robot-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="loading-text">
+                <h2>TEKBOT 2025</h2>
+                <p>Chargement de l'excellence...</p>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
     </div>
+
+    <!-- Particles Background -->
+    <div id="particles-bg"></div>
     
-    <!-- Hamburger menu button (mobile only) -->
-    <div class="mobile-menu-toggle" id="mobileMenuToggle">
-        <i class="fas fa-bars"></i>
+    <!-- Navigation Controls -->
+    <nav class="top-nav">
+        <div class="nav-brand">
+            <img src="image.png" alt="IFRI" class="brand-logo">
+            <span class="brand-text">TEKBOT 2025</span>
+        </div>
+        <div class="nav-controls">
+            <button class="control-btn search-toggle" id="searchToggle">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="control-btn theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="control-btn menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Advanced Search -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <div class="search-header">
+                <h3>Recherche Avancée</h3>
+                <button class="search-close" id="searchClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="search-input-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher dans la documentation..." autocomplete="off">
+                <div class="search-suggestions" id="searchSuggestions"></div>
+            </div>
+            <div class="search-filters">
+                <button class="filter-btn active" data-filter="all">Tout</button>
+                <button class="filter-btn" data-filter="electronique">Électronique</button>
+                <button class="filter-btn" data-filter="informatique">Informatique</button>
+                <button class="filter-btn" data-filter="mecanique">Mécanique</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
     </div>
-    
-    <div class="container">
-        <nav class="sidebar" id="sidebar">
-            <!-- Sidebar close button (mobile only) -->
-            <div class="sidebar-close" id="sidebarClose">
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="header-content">
+                <h2>Documentation</h2>
+                <p>Excellence Technique IFRI</p>
+            </div>
+            <button class="sidebar-close" id="sidebarClose">
                 <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="nav-section">
+            <div class="nav-item">
+                <a href="#accueil" class="nav-link active" data-section="home">
+                    <div class="nav-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <span>Accueil</span>
+                    <div class="nav-glow"></div>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link markdown-link" data-file="Documentation/index.md">
+                    <div class="nav-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <span>Introduction</span>
+                    <div class="nav-glow"></div>
+                </a>
+            </div>
+
+            <div class="nav-item">
+                <a href="#" class="nav-link markdown-link" data-file="Documentation/accueil.md">
+                    <div class="nav-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <span>Contexte Général</span>
+                    <div class="nav-glow"></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Week Sections with Enhanced Design -->
+        <div class="week-section">
+            <div class="week-header">
+                <div class="week-number">01</div>
+                <h3>Semaine 1</h3>
+                <div class="week-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="electronique-s1">
+                    <div class="domain-icon electronique">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="domain-name">Électronique</span>
+                    <div class="domain-badge">1</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="electronique-s1">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-1/electronique/gyroscope-accelerometre.md">
+                        <i class="fas fa-microchip"></i>
+                        <span>Gyroscope et Accéléromètre</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="informatique-s1">
+                    <div class="domain-icon informatique">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="domain-name">Informatique</span>
+                    <div class="domain-badge">3</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="informatique-s1">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-1/it/robot.md">
+                        <i class="fas fa-robot"></i>
+                        <span>Class Robot</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-1/it/roboticarm.md">
+                        <i class="fas fa-hand-paper"></i>
+                        <span>Robotic Arm</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-1/it/wheeledrobot.md">
+                        <i class="fas fa-camera"></i>
+                        <span>Wheeled Robot</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="mecanique-s1">
+                    <div class="domain-icon mecanique">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="domain-name">Mécanique</span>
+                    <div class="domain-badge">4</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="mecanique-s1">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-1/mecanique/documentation_meca.md">
+                        <i class="fas fa-tools"></i>
+                        <span>Documentation Mécanique</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/rapport-electronique.md">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Rapport Électronique (Final)</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/docu_meca_final_test/docu_meca_final_test.md">
+                        <i class="fas fa-cogs"></i>
+                        <span>Documentation Mécanique</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/docu_meca_final_test/english_docu_version">
+                        <i class="fas fa-globe"></i>
+                        <span>Mechanical Docs (English)</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="week-section">
+            <div class="week-header">
+                <div class="week-number">02</div>
+                <h3>Semaine 2</h3>
+                <div class="week-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="electronique-s2">
+                    <div class="domain-icon electronique">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="domain-name">Électronique</span>
+                    <div class="domain-badge">6</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="electronique-s2">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/electronique/assembly_configuration.md">
+                        <i class="fas fa-tools"></i>
+                        <span>Assembly Configuration</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/electronique/hardware.md">
+                        <i class="fas fa-microchip"></i>
+                        <span>Hardware</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/electronique/possible_improvements.md">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Améliorations Possibles</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/electronique/results_demonstration.md">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>Démonstration Résultats</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/electronique/software_firmware.md">
+                        <i class="fas fa-code"></i>
+                        <span>Software & Firmware</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/electronique/troubleshooting.md">
+                        <i class="fas fa-bug"></i>
+                        <span>Troubleshooting</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="informatique-s2">
+                    <div class="domain-icon informatique">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="domain-name">Informatique</span>
+                    <div class="domain-badge">4</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="informatique-s2">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/IT/readme_launch.md">
+                        <i class="fas fa-book-open"></i>
+                        <span>Introduction et Lancement</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/IT/readme_S.md">
+                        <i class="fas fa-download"></i>
+                        <span>Sensor Subscriber</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/IT/readme_st.md">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Streamlit App</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="mecanique-s2">
+                    <div class="domain-icon mecanique">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="domain-name">Mécanique</span>
+                    <div class="domain-badge">1</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="mecanique-s2">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-2/mecanique/documentation_meca.md">
+                        <i class="fas fa-cogs"></i>
+                        <span>Niveau Intermédiaire</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="week-section">
+            <div class="week-header">
+                <div class="week-number">03</div>
+                <h3>Semaine 3</h3>
+                <div class="week-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="electronique-s3">
+                    <div class="domain-icon electronique">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <span class="domain-name">Électronique</span>
+                    <div class="domain-badge">2</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="electronique-s3">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-3/electronique/README.md">
+                        <i class="fas fa-tv"></i>
+                        <span>Afficheur 7 Servo Segments</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-3/electronique/code.md">
+                        <i class="fas fa-code"></i>
+                        <span>Code 7 Servo Segments</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="informatique-s3">
+                    <div class="domain-icon informatique">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <span class="domain-name">Informatique</span>
+                    <div class="domain-badge">3</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="informatique-s3">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-3/IT/FOnctionnement.md">
+                        <i class="fas fa-book-open"></i>
+                        <span>Introduction</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-3/IT/Algo.md">
+                        <i class="fas fa-code"></i>
+                        <span>Algorithme de Pathfinding</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-3/IT/Cartographie_Nav2.md">
+                        <i class="fas fa-map"></i>
+                        <span>Cartographie Nav2</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="mecanique-s3">
+                    <div class="domain-icon mecanique">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="domain-name">Mécanique</span>
+                    <div class="domain-badge">2</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="mecanique-s3">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-3/mecanique/docu_meca_3.md">
+                        <i class="fas fa-level-up-alt"></i>
+                        <span>Niveau Avancé</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/semaine-3/mecanique/docu_meca_test3.md">
+                        <i class="fas fa-level-up-alt"></i>
+                        <span>Advanced Level (English)</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Test -->
+        <div class="week-section">
+            <div class="week-header final">
+                <div class="week-number">🏆</div>
+                <h3>Test Final</h3>
+                <div class="week-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill final" style="width: 100%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-toggle" data-domain="test-final">
+                    <div class="domain-icon final">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <span class="domain-name">Multidisciplinaire</span>
+                    <div class="domain-badge">7</div>
+                    <i class="fas fa-chevron-right expand-icon"></i>
+                </div>
+                <div class="domain-content collapsed" id="test-final">
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/presentation.md">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Présentation Générale</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/informatique.md">
+                        <i class="fas fa-desktop"></i>
+                        <span>Interface de Monitoring (IT)</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/analyse-it-classification-couleur.md">
+                        <i class="fas fa-brain"></i>
+                        <span>Classification Couleur</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/rapport-electronique.md">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Rapport Électronique</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/docu_meca_final_test/docu_meca_final_test.md">
+                        <i class="fas fa-tools"></i>
+                        <span>Documentation Mécanique</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/FinalTest_Conv/arduino_code.md">
+                        <i class="fas fa-code"></i>
+                        <span>Arduino Code Docs</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                    <a href="#" class="content-link markdown-link" data-file="Documentation/test-final/FinalTest_Conv/ROS_interface.md">
+                        <i class="fas fa-cogs"></i>
+                        <span>Interface ROS Monitoring</span>
+                        <div class="link-indicator"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Hero Section -->
+        <section class="hero-section" id="accueil">
+            <div class="hero-background">
+                <div class="hero-particles"></div>
+                <div class="hero-grid"></div>
             </div>
             
-            <div class="sidebar-header">
-                <img src="image.png" alt="IFRI Logo" class="sidebar-logo">
-                <div>
-                    <h3>TRC 2025</h3>
-                    <p>Documentation IFRI</p>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-trophy"></i>
+                    <span>Excellence Technique 2025</span>
                 </div>
-            </div>
-
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="#accueil" class="nav-link active">
-                        <span class="nav-link-icon"><i class="fas fa-home"></i></span>
-                        Accueil
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="Documentation/index.md" class="nav-link markdown-link" data-file="Documentation/index.md">
-                        <span class="nav-link-icon"><i class="fas fa-book"></i></span>
-                        Introduction
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="Documentation/accueil.md" class="nav-link markdown-link" data-file="Documentation/accueil.md">
-                        <span class="nav-link-icon"><i class="fas fa-info-circle"></i></span>
-                        Contexte Général
-                    </a>
-                </li>
-            </ul>
-
-            <div class="section-divider">
-                <span class="section-divider-icon"><i class="fas fa-calendar"></i></span>
-                SEMAINE 1
-            </div>
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="electronique-s1">
-                        <span class="section-icon"><i class="fas fa-bolt"></i></span>
-                        <span>Électronique</span>
-                        <span class="arrow">▶</span>
+                
+                <h1 class="hero-title">
+                    <span class="title-line">TEKBOT</span>
+                    <span class="title-line highlight">Robotics Challenge</span>
+                    <span class="title-year">2025</span>
+                </h1>
+                
+                <p class="hero-description">
+                    Documentation officielle de l'équipe IFRI - Une démonstration d'excellence en robotique, électronique, informatique et mécanique de précision.
+                </p>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">10</div>
+                        <div class="stat-label">Membres d'équipe</div>
                     </div>
-                    <ul class="section-content collapsed" id="electronique-s1">
-                        <li><a href="Documentation/semaine-1/electronique/gyroscope-accelerometre.md" class="nav-link markdown-link" data-file="Documentation/semaine-1/electronique/gyroscope-accelerometre.md">
-                            <span class="nav-link-icon"><i class="fas fa-microchip"></i></span>
-                            Gyroscope et Accéléromètre
-                        </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="informatique-s1">
-                        <span class="section-icon"><i class="fas fa-laptop-code"></i></span>
-                        <span>Informatique</span>
-                        <span class="arrow">▶</span>
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Spécialités techniques</div>
                     </div>
-                    <ul class="section-content collapsed" id="informatique-s1">
-                        <li><a href="Documentation/semaine-1/it/robot.md" class="nav-link markdown-link" data-file="Documentation/semaine-1/it/robot.md">
-                            <span class="nav-link-icon"><i class="fas fa-robot"></i></span>
-                            Class Robot
-                        </a></li>
-                        <li><a href="Documentation/semaine-1/it/roboticarm.md" class="nav-link markdown-link" data-file="Documentation/semaine-1/it/roboticarm.md">
-                            <span class="nav-link-icon"><i class="fas fa-hand-paper"></i></span>
-                            Robotic Arm 
-                        </a></li>
-                        <li><a href="Documentation/semaine-1/it/wheeledrobot.md" class="nav-link markdown-link" data-file="Documentation/semaine-1/it/wheeledrobot.md">
-                            <span class="nav-link-icon"><i class="fas fa-camera"></i></span>
-                            wheeled Robot
-                        </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="mecanique-s1">
-                        <span class="section-icon"><i class="fas fa-cog"></i></span>
-                        <span>Mécanique</span>
-                        <span class="arrow">▶</span>
+                    <div class="stat-item">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Semaines d'excellence</div>
                     </div>
-                    <ul class="section-content collapsed" id="mecanique-s1">
-                        <li><a href="Documentation/semaine-1/mecanique/documentation_meca.md" class="nav-link markdown-link" data-file="Documentation/semaine-1/mecanique/documentation_meca.md">
-                            <span class="nav-link-icon"><i class="fas fa-tools"></i></span>
-                            Documentation Mécanique
-                        </a></li>
-                        <li><a href="Documentation/test-final/rapport-electronique.md" class="nav-link markdown-link" data-file="Documentation/test-final/rapport-electronique.md">
-                            <span class="nav-link-icon"><i class="fas fa-file-alt"></i></span>
-                            Rapport Électronique (Final)
-                        </a></li>
-                        <li><a href="Documentation/test-final/docu_meca_final_test/docu_meca_final_test.md" class="nav-link markdown-link" data-file="Documentation/test-final/docu_meca_final_test/docu_meca_final_test.md">
-                            <span class="nav-link-icon"><i class="fas fa-cogs"></i></span>
-                            Documentation Mécanique
-                        </a></li>
-                        <li><a href="Documentation/test-final/docu_meca_final_test/english_docu_version" class="nav-link markdown-link" data-file="Documentation/test-final/docu_meca_final_test/english_docu_version">
-                            <span class="nav-link-icon"><i class="fas fa-globe"></i></span>
-                            Mechanical Docs (English)
-                        </a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="section-divider">
-                <span class="section-divider-icon"><i class="fas fa-calendar"></i></span>
-                SEMAINE 2
-            </div>
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="electronique-s2">
-                        <span class="section-icon"><i class="fas fa-bolt"></i></span>
-                        <span>Électronique</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <ul class="section-content collapsed" id="electronique-s2">
-                         <li><a href="Documentation/semaine-2/electronique/assembly_configuration.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/electronique/assembly_configuration.md">
-                            <span class="nav-link-icon"><i class="fas fa-tools"></i></span>
-                            assembly_configuration
-                        </a></li>
-                         <li><a href="Documentation/semaine-2/electronique/hardware.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/electronique/hardware.md">
-                            <span class="nav-link-icon"><i class="fas fa-microchip"></i></span>
-                            hardware
-                        </a></li>
-                         <li><a href="Documentation/semaine-2/electronique/possible_improvements.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/electronique/possible_improvements.md">
-                            <span class="nav-link-icon"><i class="fas fa-lightbulb"></i></span>
-                            possible_improvements
-                        </a></li>
-                         <li><a href="Documentation/semaine-2/electronique/results_demonstration.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/electronique/results_demonstration.md">
-                            <span class="nav-link-icon"><i class="fas fa-clipboard-check"></i></span>
-                            results_demonstration
-                        </a></li>
-                         <li><a href="Documentation/semaine-2/electronique/software_firmware.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/electronique/software_firmware.md">
-                            <span class="nav-link-icon"><i class="fas fa-code"></i></span>
-                            software_firmware
-                        </a></li>
-                         <li><a href="Documentation/semaine-2/electronique/troubleshooting.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/electronique/troubleshooting.md">
-                            <span class="nav-link-icon"><i class="fas fa-bug"></i></span>
-                            troubleshooting
-                        </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="informatique-s2">
-                        <span class="section-icon"><i class="fas fa-laptop-code"></i></span>
-                        <span>Informatique</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <ul class="section-content collapsed" id="informatique-s2">
-                        <li><a href="Documentation/semaine-2/IT/readme_launch.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/IT/readme_launch.md">
-                            <span class="nav-link-icon"><i class="fas fa-book-open"></i></span>
-                            Introduction and launch
-                        </a></li>
-                        <li><a href="Documentation/semaine-2/IT/readme_launch.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/IT/readme_launch.md">
-                            <span class="nav-link-icon"><i class="fas fa-rocket"></i></span>
-                            sensor_launch
-                        </a></li>
-                        <li><a href="Documentation/semaine-2/IT/readme_S.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/IT/readme_S.md">
-                            <span class="nav-link-icon"><i class="fas fa-download"></i></span>
-                            sensor_subscriber
-                        </a></li>
-                        <li><a href="Documentation/semaine-2/IT/readme_st.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/IT/readme_st.md">
-                            <span class="nav-link-icon"><i class="fas fa-chart-line"></i></span>
-                            streamlit_app
-                        </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="mecanique-s2">
-                        <span class="section-icon"><i class="fas fa-cog"></i></span>
-                        <span>Mécanique</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <ul class="section-content collapsed" id="mecanique-s2">
-                        <li><a href="Documentation/semaine-2/mecanique/documentation_meca.md" class="nav-link markdown-link" data-file="Documentation/semaine-2/mecanique/documentation_meca.md">
-                            <span class="nav-link-icon"><i class="fas fa-cogs"></i></span>
-                            Niveau Intermédiaire
-                        </a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="section-divider">
-                <span class="section-divider-icon"><i class="fas fa-calendar"></i></span>
-                SEMAINE 3
-            </div>
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="electronique-s3">
-                        <span class="section-icon"><i class="fas fa-bolt"></i></span>
-                        <span>Électronique</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <ul class="section-content collapsed" id="electronique-s3">
-                        <li><a href="Documentation/semaine-3/electronique/README.md"  class="nav-link markdown-link" data-file="Documentation/semaine-3/electronique/README.md">
-                            <span class="nav-link-icon"><i class="fas fa-tv"></i></span>
-                            Afficheur 7 servo Segments
-                        </a></li>
-                        <li><a href="Documentation/semaine-3/electronique/code.md"  class="nav-link markdown-link" data-file="Documentation/semaine-3/electronique/code.md">
-                            <span class="nav-link-icon"><i class="fas fa-tv"></i></span>
-                           Code 7 servo Segments
-                        </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="informatique-s3">
-                        <span class="section-icon"><i class="fas fa-laptop-code"></i></span>
-                        <span>Informatique</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <ul class="section-content collapsed" id="informatique-s3">
-                        <li><a href="Documentation/semaine-3/IT/FOnctionnement.md" class="nav-link markdown-link" data-file="Documentation/semaine-3/IT/FOnctionnement.md">
-                            <span class="nav-link-icon"><i class="fas fa-book-open"></i></span>
-                            Introduction
-                        </a></li>
-                        <li><a href="Documentation/semaine-3/IT/Algo.md" class="nav-link markdown-link" data-file="Documentation/semaine-3/IT/Algo.md">
-                            <span class="nav-link-icon"><i class="fas fa-code"></i></span>
-                            Algorithme de pathfinding 
-                        </a></li>
-                        <li><a href="Documentation/semaine-3/IT/Cartographie Nav2.md" class="nav-link markdown-link" data-file="Documentation/semaine-3/IT/Cartographie Nav2.md">
-                            <span class="nav-link-icon"><i class="fas fa-code"></i></span>
-                            Algorithme de cartographie Nav2
-                        </a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="mecanique-s3">
-                        <span class="section-icon"><i class="fas fa-cog"></i></span>
-                        <span>Mécanique</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <ul class="section-content collapsed" id="mecanique-s3">
-                       <li><a href="Documentation/semaine-3/mecanique/docu_meca_3.md" class="nav-link markdown-link" data-file="Documentation/semaine-3/mecanique/docu_meca_3.md">
-                            <span class="nav-link-icon"><i class="fas fa-level-up-alt"></i></span>
-                            Niveau Avancé
-                        </a></li>
-                        <li><a href="Documentation/semaine-3/mecanique/docu_meca_test3.md" class="nav-link markdown-link" data-file="Documentation/semaine-3/mecanique/docu_meca_test3.md">
-                            <span class="nav-link-icon"><i class="fas fa-level-up-alt"></i></span>
-                            Advanced level (eng version)
-                        </a></li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="section-divider">
-                <span class="section-divider-icon"><i class="fas fa-trophy"></i></span>
-                TEST FINAL
-            </div>
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <div class="section-toggle" data-section="test-final">
-                        <span class="section-icon"><i class="fas fa-tasks"></i></span>
-                        <span>Multidisciplinaire</span>
-                        <span class="arrow">▶</span>
-                    </div>
-                    <ul class="section-content collapsed" id="test-final">
-                        <li><a href="Documentation/test-final/presentation.md" class="nav-link markdown-link" data-file="Documentation/test-final/presentation.md">
-                            <span class="nav-link-icon"><i class="fas fa-info-circle"></i></span>
-                            Présentation Générale
-                        </a></li>
-                        <li><a href="Documentation/test-final/informatique.md" class="nav-link markdown-link" data-file="Documentation/test-final/informatique.md">
-                            <span class="nav-link-icon"><i class="fas fa-desktop"></i></span>
-                            Interface de Monitoring (IT)
-                        </a></li>
-                        <li><a href="Documentation/test-final/analyse-it-classification-couleur.md" class="nav-link markdown-link" data-file="Documentation/test-final/analyse-it-classification-couleur.md">
-                            <span class="nav-link-icon"><i class="fas fa-brain"></i></span>
-                            Analyse IT : Classification Couleur
-                        </a></li>
-                        <li><a href="Documentation/test-final/rapport-electronique.md" class="nav-link markdown-link" data-file="Documentation/test-final/rapport-electronique.md">
-                            <span class="nav-link-icon"><i class="fas fa-file-alt"></i></span>
-                            Rapport Électronique
-                        </a></li>
-                                                <li><a href="Documentation/test-final/docu_meca_final_test/docu_meca_final_test.md" class="nav-link markdown-link" data-file="Documentation/test-final/docu_meca_final_test/docu_meca_final_test.md">
-                            <span class="nav-link-icon"><i class="fas fa-tools"></i></span>
-                            Documentation Mécanique
-                        </a></li>
-                        <li><a href="Documentation/test-final/FinalTest_Conv/arduino_code.md" class="nav-link markdown-link" data-file="Documentation/test-final/FinalTest_Conv/arduino_code.md">
-                            <span class="nav-link-icon"><i class="fas fa-code"></i></span>
-                            arduino code docs
-                        </a></li>
-                        <li><a href="Documentation/test-final/FinalTest_Conv/ROS_interface.md" class="nav-link markdown-link" data-file="Documentation/test-final/FinalTest_Conv/ROS_interface.md">
-                            <span class="nav-link-icon"><i class="fas fa-cogs"></i></span>
-                            interface de monitoring ROS
-                        </a></li>
-                        <li><a href="Documentation/test-final/Final_doc/documentation_mecanique_trc_2k25.md" class="nav-link markdown-link" data-file="Documentation/test-final/Final_doc/documentation_mecanique_trc_2k25.md">
-                            <span class="nav-link-icon"><i class="fas fa-file-alt"></i></span>
-                            documentation mécanique final
-                        </a></li>
-
-                    </ul>
-                </li>
-            </ul>
-        </nav>
-
-        <main class="main-content">
-            <div class="content-header" id="main-header">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <img src="image copy.png" alt="TEKBOT Logo" style="height: 40px; width: auto;">
-                    <h1>TEKBOT Robotics Challenge 2025</h1>
                 </div>
-            </div>
-
-            <div class="content-body" id="main-content">
-                <section id="accueil">
-                    <div class="hero-section">
-                        <h2>🚀 L'Équipe IFRI au TEKBOT Robotics Challenge 2025</h2>
-                        <p class="lead">Bienvenue dans la documentation officielle de l'équipe IFRI pour le TEKBOT Robotics Challenge 2025.</p>
-                    </div>
-                    
-                    <h2>🚀 Notre Mission</h2>
-                    <p>L'équipe IFRI est engagée dans une mission essentielle : contribuer activement à l'évolution technologique de l'Afrique. Notre participation au TEKBOT Robotics Challenge 2025 représente bien plus qu'une simple compétition - c'est l'expression de notre volonté de faire rayonner le génie béninois sur la scène internationale et de démontrer l'excellence de notre savoir-faire.</p>
-                    
-                    <h2>👥 Notre Équipe</h2>
-                    <p>Nous sommes une équipe de 10 membres passionnés, organisés en trois pôles d'expertise complémentaires:</p>
-                    <ul class="feature-list">
-                        <li><strong>Team IT</strong>: Experts en technologies ROS et intelligence artificielle, créant les systèmes de contrôle intelligents de nos robots</li>
-                        <li><strong>Team Électronique</strong>: Maîtres des circuits et capteurs, transformant les concepts en réalités électroniques fonctionnelles</li>
-                        <li><strong>Team Mécanique</strong>: Artisans de la précision, concepteurs des structures et mécanismes qui donnent forme à nos innovations</li>
-                    </ul>
-                    <p>Chaque membre apporte ses compétences uniques pour former un écosystème d'innovation robuste et polyvalent.</p>
-                    
-                    <h2>💫 Nos Valeurs</h2>
-                    <p>Notre équipe se distingue par son amour des défis et sa passion pour l'innovation. Nous abordons chaque problème comme une opportunité d'apprentissage et de dépassement. Notre devise, <em>"Nous incarnons l'excellence"</em>, reflète l'esprit de notre institution mère, l'IFRI, connue pour son engagement à "bâtir l'excellence".</p>
-                    
-                    <h2>🏆 Nos Objectifs</h2>
-                    <p>Notre ambition se décline en plusieurs dimensions:</p>
-                    <ul class="feature-list">
-                        <li>Remporter le trophée du TEKBOT Robotics Challenge 2025</li>
-                        <li>Mettre en lumière les talents technologiques du Bénin</li>
-                        <li>Acquérir une expérience pratique inestimable</li>
-                        <li>Cultiver l'apprentissage continu et le plaisir de l'innovation</li>
-                        <li>Contribuer à la recherche en robotique avec une perspective africaine</li>
-                    </ul>
-                    
-                    <h2>🤝 Notre Réseau de Soutien</h2>
-                    <p>Bien que notre équipe officielle compte 10 membres, nous bénéficions du soutien précieux d'autres talents de l'IFRI qui, sans faire partie formellement de l'équipe, nous apportent leur expertise et leurs encouragements. Cette solidarité illustre parfaitement l'esprit de communauté qui anime notre institution.</p>
-                    
-                    <blockquote class="quote">
-                        "La technologie n'est rien. Ce qui est important, c'est d'avoir foi en ce que les gens peuvent faire avec. L'innovation, c'est distinguer entre un leader et un suiveur." - Steve Jobs
-                    </blockquote>
-                    
-                    <div style="text-align: center; margin-top: 30px;">
-                        <a href="Documentation/index.md" class="nav-link markdown-link" data-file="Documentation/index.md" style="display: inline-block; padding: 12px 24px; background-color: var(--accent-color); color: white; text-decoration: none; border-radius: 6px; font-weight: 600; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                            Découvrir la compétition →
-                        </a>
-                    </div>
-                </section>
-
-                <section id="contexte">
-                    <h2>📅 Contexte général</h2>
-                    <p>Dans le cadre de la Tekbot Robotics Challenge 2K25, un processus de présélection rigoureux, s'étalant sur cinq semaines, est mis en place afin d'évaluer les compétences techniques des équipes participantes. Chaque semaine, une nouvelle compétence sera mise à l'épreuve.</p>
-                    
-                    <div class="info-box">
-                        <span class="info-icon">💡</span>
-                        <p>L'objectif de cette présélection est d'identifier les équipes les plus qualifiées, polyvalentes et capables de travailler en synergie.</p>
-                    </div>
-
-                    <p>Ainsi chaque sous-équipe de vos équipes respectives devront démontrer leur expertise en électronique, mécanique et informatique à travers des épreuves techniques.</p>
-                </section>
-
-                <section id="tableau-recap">
-                    <h2>🏆 Tableau récapitulatif des tests de présélection</h2>
-                    <div class="table-container">
-                        <table class="doc-table">
-                            <thead>
-                                <tr>
-                                    <th>Domaine</th>
-                                    <th>Tests</th>
-                                    <th>Durée</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td rowspan="3" class="domain-cell electronique">⚡ Électronique</td>
-                                    <td>Test 1: Test input : Gyroscope et accéléromètre</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td>Test 2: Test communication : La boîte noire</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td>Test 3: Test output: Réalisation d'un afficheur 7 segments</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3" class="domain-cell informatique">💻 IT</td>
-                                    <td>Test 1: Réalisation d'un système de classe de gestion d'un Robot</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td>Test 2: Introduction à ROS2</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td>Test 3: Création d'un Algorithme de Pathfinding</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td rowspan="3" class="domain-cell mecanique">🔧 Mécanique</td>
-                                    <td>Test 1: Niveau Débutant</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td>Test 2: Niveau Intermédiaire</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td>Test 3: Niveau Avancé</td>
-                                    <td>1 semaine</td>
-                                </tr>
-                                <tr>
-                                    <td class="domain-cell final">🏆 Multidisciplinaire</td>
-                                    <td>Test final : Réalisation d'un système de convoyeur</td>
-                                    <td>2 semaines</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section id="planning">
-                    <h2>📅 Planning des tests de présélection</h2>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-marker">1</div>
-                            <div class="timeline-content">
-                                <h3>Semaine 1</h3>
-                                <p>Réalisation et documentation des tests 1</p>
-                                <small>Review en fin de semaine</small>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker">2</div>
-                            <div class="timeline-content">
-                                <h3>Semaine 2</h3>
-                                <p>Réalisation et documentation des tests 2</p>
-                                <small>Review en fin de semaine</small>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker">3</div>
-                            <div class="timeline-content">
-                                <h3>Semaine 3</h3>
-                                <p>Réalisation et documentation des tests 3</p>
-                                <small>Review en fin de semaine</small>
-                            </div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-marker">4-5</div>
-                            <div class="timeline-content">
-                                <h3>Semaines 4 et 5</h3>
-                                <p>Réalisation et documentation du test final</p>
-                                <small>Review finale (3h)</small>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="objectifs">
-                    <h2>🏆 Objectifs du Challenge</h2>
-                    <p>Le TEKBOT Robotics Challenge vise à stimuler l'innovation et la collaboration parmi les étudiants passionnés de robotique.</p>
-                    
-                    <h3>Ce qui est évalué :</h3>
-                    <ul class="feature-list">
-                        <li><strong>Ingéniosité Technique</strong> : Capacité à trouver des solutions créatives aux problèmes.</li>
-                        <li><strong>Performance du Robot</strong> : Efficacité et fiabilité du robot lors des épreuves.</li>
-                        <li><strong>Travail d'Équipe</strong> : Collaboration et communication au sein de l'équipe.</li>
-                        <li><strong>Documentation</strong> : Clarté et complétude de la documentation technique.</li>
-                    </ul>
-                </section>
-
-                <section id="format">
-                    <h2>🎮 Format des Épreuves</h2>
-                    <p>Le challenge se déroule sur plusieurs semaines, chaque semaine introduisant de nouvelles tâches et contraintes.</p>
-                    
-                    <blockquote class="quote">
-                        "L'innovation distingue entre un leader et un suiveur." - Steve Jobs
-                    </blockquote>
-                    
-                    <p>Préparez-vous à une aventure exigeante mais enrichissante !</p>
-                </section>
-            </div>
-
-            <!-- Container for markdown content -->
-            <div class="markdown-content" id="markdown-container">
-                <!-- Markdown content will be loaded here -->
+                
+                <div class="hero-actions">
+                    <button class="cta-button primary" onclick="scrollToSection('mission')">
+                        <span>Découvrir notre mission</span>
+                        <i class="fas fa-rocket"></i>
+                    </button>
+                    <button class="cta-button secondary markdown-link" data-file="Documentation/index.md">
+                        <span>Voir la documentation</span>
+                        <i class="fas fa-book-open"></i>
+                    </button>
+                </div>
             </div>
             
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer-left">
-                    <img src="image.png" alt="IFRI Logo" class="footer-logo">
-                    <div class="footer-info">
-                        <h3>TEKBOT Robotics Challenge</h3>
-                        <p>Documentation Édition 2025</p>
+            <div class="hero-visual">
+                <div class="robot-showcase">
+                    <div class="robot-icon-large">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="tech-indicators">
+                        <div class="indicator electronique">
+                            <i class="fas fa-bolt"></i>
+                            <span>Électronique</span>
+                        </div>
+                        <div class="indicator informatique">
+                            <i class="fas fa-code"></i>
+                            <span>Informatique</span>
+                        </div>
+                        <div class="indicator mecanique">
+                            <i class="fas fa-cog"></i>
+                            <span>Mécanique</span>
+                        </div>
                     </div>
                 </div>
-                <div class="footer-center">
-                    <p>© 2025 IFRI. Tous droits réservés.</p>
-                    <p>Institut de Formation et de Recherche en Informatique</p>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="content-section mission-section" id="mission">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-target"></i>
                 </div>
-                <div class="footer-right">
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <h2>Notre Mission</h2>
+                <p>L'excellence au service de l'innovation africaine</p>
+            </div>
+            
+            <div class="mission-content">
+                <div class="mission-text">
+                    <p class="lead">L'équipe IFRI est engagée dans une mission essentielle : contribuer activement à l'évolution technologique de l'Afrique. Notre participation au TEKBOT Robotics Challenge 2025 représente bien plus qu'une simple compétition - c'est l'expression de notre volonté de faire rayonner le génie béninois sur la scène internationale.</p>
+                    
+                    <div class="mission-highlights">
+                        <div class="highlight-item">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>Innovation technologique de pointe</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-globe-africa"></i>
+                            <span>Rayonnement du talent africain</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-trophy"></i>
+                            <span>Excellence en robotique</span>
+                        </div>
+                    </div>
                 </div>
-            </footer>
-        </main>
+                
+                <div class="mission-visual">
+                    <div class="achievement-card">
+                        <div class="card-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <h4>Notre Devise</h4>
+                        <p>"Nous incarnons l'excellence"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="content-section team-section" id="team">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2>Notre Équipe</h2>
+                <p>10 membres passionnés, 3 pôles d'expertise</p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card electronique">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Team Électronique</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Maîtres des circuits et capteurs, transformant les concepts en réalités électroniques fonctionnelles</p>
+                        <div class="tech-tags">
+                            <span class="tag">Circuits PCB</span>
+                            <span class="tag">Capteurs IoT</span>
+                            <span class="tag">Microcontrôleurs</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card informatique">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Team Informatique</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Experts en technologies ROS et intelligence artificielle, créant les systèmes de contrôle intelligents</p>
+                        <div class="tech-tags">
+                            <span class="tag">ROS2</span>
+                            <span class="tag">IA & ML</span>
+                            <span class="tag">Pathfinding</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card mecanique">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Team Mécanique</h3>
+                    </div>
+                    <div class="card-content">
+                        <p>Artisans de la précision, concepteurs des structures et mécanismes qui donnent forme à nos innovations</p>
+                        <div class="tech-tags">
+                            <span class="tag">CAD 3D</span>
+                            <span class="tag">Simulation</span>
+                            <span class="tag">Prototypage</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenge Overview -->
+        <section class="content-section challenge-section" id="challenge">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fas fa-chess-board"></i>
+                </div>
+                <h2>Défi Technique</h2>
+                <p>5 semaines d'excellence progressive</p>
+            </div>
+            
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="timeline-item completed">
+                        <div class="timeline-marker">
+                            <span class="week-num">01</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Tests Fondamentaux</h4>
+                            <p>Gyroscope, Classes Robot, Niveau Débutant</p>
+                            <div class="timeline-status">Terminé</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item completed">
+                        <div class="timeline-marker">
+                            <span class="week-num">02</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Communication & Interfaces</h4>
+                            <p>Boîte Noire, ROS2, Niveau Intermédiaire</p>
+                            <div class="timeline-status">Terminé</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item completed">
+                        <div class="timeline-marker">
+                            <span class="week-num">03</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Systèmes Avancés</h4>
+                            <p>Afficheur 7-segments, Pathfinding, Niveau Avancé</p>
+                            <div class="timeline-status">Terminé</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item completed final">
+                        <div class="timeline-marker">
+                            <span class="week-num">🏆</span>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Test Final Multidisciplinaire</h4>
+                            <p>Système de convoyeur intégré</p>
+                            <div class="timeline-status">Excellence</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Markdown Content Container -->
+    <div class="markdown-container" id="markdownContainer">
+        <div class="markdown-header">
+            <button class="back-button" id="backButton">
+                <i class="fas fa-arrow-left"></i>
+                <span>Retour</span>
+            </button>
+            <div class="document-actions">
+                <button class="action-btn print-btn">
+                    <i class="fas fa-print"></i>
+                </button>
+                <button class="action-btn share-btn">
+                    <i class="fas fa-share"></i>
+                </button>
+            </div>
+        </div>
+        <div class="markdown-content" id="markdownContent"></div>
     </div>
 
-    <!-- Back to top button -->
-    <button id="backToTop" class="back-to-top" title="Retour en haut"><i class="fas fa-arrow-up"></i></button>
+    <!-- Floating Action Button -->
+    <div class="fab-container">
+        <button class="fab" id="scrollTopBtn">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script src="script.js"></script>
     <script>
-        // Theme toggle functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const themeToggle = document.getElementById('themeToggle');
-            const themeIcon = document.getElementById('themeIcon');
-            
-            // Check for saved theme preference or use preferred color scheme
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.body.classList.add('dark-theme');
-                themeIcon.textContent = '☀️';
-            } else if (savedTheme === 'light') {
-                document.body.classList.remove('dark-theme');
-                themeIcon.textContent = '🌙';
-            } else {
-                // Check prefered color scheme
-                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                    document.body.classList.add('dark-theme');
-                    themeIcon.textContent = '☀️';
-                }
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#6366f1',
+                primaryTextColor: '#1f2937',
+                primaryBorderColor: '#e5e7eb',
+                lineColor: '#6b7280',
+                secondaryColor: '#f3f4f6',
+                tertiaryColor: '#ffffff'
             }
-            
-            // Toggle theme when button is clicked
-            themeToggle.addEventListener('click', function() {
-                if (document.body.classList.contains('dark-theme')) {
-                    document.body.classList.remove('dark-theme');
-                    themeIcon.textContent = '🌙';
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.body.classList.add('dark-theme');
-                    themeIcon.textContent = '☀️';
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
         });
     </script>
-</body>
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
