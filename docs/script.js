@@ -1043,6 +1043,35 @@ class TekbotDocumentation {
             }
         });
 
+        // Forcer la mise à jour des cartes d'équipe
+        safeQueryAndUpdate('.team-card', (card) => {
+            if (card) {
+                const header = card.querySelector('.card-header h3');
+                const content = card.querySelector('.card-content p');
+                const tags = card.querySelectorAll('.tag');
+                
+                if (this.currentTheme === 'dark') {
+                    if (header) header.style.color = '#ffffff';
+                    if (content) content.style.color = '#e2e8f0';
+                    tags.forEach(tag => {
+                        if (tag) {
+                            tag.style.color = '#f1f5f9';
+                            tag.style.backgroundColor = '#475569';
+                        }
+                    });
+                } else {
+                    if (header) header.style.color = '';
+                    if (content) content.style.color = '';
+                    tags.forEach(tag => {
+                        if (tag) {
+                            tag.style.color = '';
+                            tag.style.backgroundColor = '';
+                        }
+                    });
+                }
+            }
+        });
+
         // Force une re-application des styles CSS
         requestAnimationFrame(() => {
             document.body.style.display = 'none';
