@@ -11,7 +11,7 @@ class TekbotDocumentation {
         this.currentMarkdownFile = null;
         this.searchIndex = [];
         this.observers = new Map();
-        
+
         this.init();
     }
 
@@ -22,7 +22,7 @@ class TekbotDocumentation {
         this.setupIntersectionObservers();
         this.initializeAnimations();
         this.handleLoading();
-        
+
         // Initialize after DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.postInit());
@@ -96,7 +96,7 @@ class TekbotDocumentation {
         document.addEventListener('click', (e) => {
             const markdownLink = e.target.closest('.markdown-link');
             const navLink = e.target.closest('.nav-link');
-            
+
             if (markdownLink) {
                 e.preventDefault();
                 const filePath = markdownLink.getAttribute('data-file');
@@ -147,8 +147,9 @@ class TekbotDocumentation {
 
     initializeTheme() {
         const body = document.body;
-        const themeIcon = document.querySelector('#themeToggle i');
-        
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+
         if (this.currentTheme === 'dark') {
             body.classList.add('dark-theme');
             if (themeIcon) themeIcon.className = 'fas fa-sun';
@@ -156,12 +157,16 @@ class TekbotDocumentation {
             body.classList.remove('dark-theme');
             if (themeIcon) themeIcon.className = 'fas fa-moon';
         }
+
+        // Force une mise à jour des styles
+        this.updateThemeSpecificElements();
     }
 
     toggleTheme() {
         const body = document.body;
-        const themeIcon = document.querySelector('#themeToggle i');
-        
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+
         if (body.classList.contains('dark-theme')) {
             body.classList.remove('dark-theme');
             this.currentTheme = 'light';
@@ -171,8 +176,9 @@ class TekbotDocumentation {
             this.currentTheme = 'dark';
             if (themeIcon) themeIcon.className = 'fas fa-sun';
         }
-        
+
         localStorage.setItem('theme', this.currentTheme);
+        this.updateThemeSpecificElements();
         this.animateThemeTransition();
     }
 
@@ -190,9 +196,9 @@ class TekbotDocumentation {
             pointer-events: none;
             transition: opacity 0.3s ease;
         `;
-        
+
         document.body.appendChild(overlay);
-        
+
         setTimeout(() => {
             overlay.style.opacity = '0.8';
             setTimeout(() => {
@@ -205,7 +211,7 @@ class TekbotDocumentation {
     toggleSidebar() {
         this.isSidebarOpen = !this.isSidebarOpen;
         const sidebar = document.getElementById('sidebar');
-        
+
         if (sidebar) {
             if (this.isSidebarOpen) {
                 sidebar.classList.add('active');
@@ -228,7 +234,7 @@ class TekbotDocumentation {
 
     createOverlay() {
         if (document.querySelector('.page-overlay')) return;
-        
+
         const overlay = document.createElement('div');
         overlay.className = 'page-overlay';
         overlay.style.cssText = `
@@ -242,11 +248,11 @@ class TekbotDocumentation {
             opacity: 0;
             transition: opacity 0.3s ease;
         `;
-        
+
         document.body.appendChild(overlay);
-        
+
         setTimeout(() => overlay.style.opacity = '1', 10);
-        
+
         overlay.addEventListener('click', () => this.closeSidebar());
     }
 
@@ -266,7 +272,7 @@ class TekbotDocumentation {
         this.isSearchOpen = !this.isSearchOpen;
         const searchOverlay = document.getElementById('searchOverlay');
         const searchInput = document.getElementById('searchInput');
-        
+
         if (searchOverlay) {
             if (this.isSearchOpen) {
                 searchOverlay.classList.add('active');
@@ -290,12 +296,12 @@ class TekbotDocumentation {
     createSearchIndex() {
         // Create a searchable index of all content
         const navLinks = document.querySelectorAll('.markdown-link');
-        
+
         navLinks.forEach(link => {
             const title = link.textContent.trim();
             const file = link.getAttribute('data-file');
             const section = this.getSection(link);
-            
+
             if (title && file) {
                 this.searchIndex.push({
                     title,
@@ -384,11 +390,11 @@ class TekbotDocumentation {
         const domainId = toggleElement.getAttribute('data-domain');
         const content = document.getElementById(domainId);
         const expandIcon = toggleElement.querySelector('.expand-icon');
-        
+
         if (!content) return;
 
         const isExpanded = content.classList.contains('expanded');
-        
+
         if (isExpanded) {
             content.classList.remove('expanded');
             content.classList.add('collapsed');
@@ -423,23 +429,23 @@ class TekbotDocumentation {
         if (!filePath) return;
 
         this.showLoadingState();
-        
+
         try {
             const response = await fetch(filePath);
-            
+
             if (!response.ok) {
                 throw new Error(`Could not load file: ${filePath}`);
             }
-            
+
             const markdownText = await response.text();
             const htmlContent = await this.convertMarkdownToHTML(markdownText);
-            
+
             this.displayMarkdownContent(htmlContent);
             this.currentMarkdownFile = filePath;
-            
+
             // Update URL without page reload
             history.pushState({ file: filePath }, '', `#doc-${filePath.replace(/[^a-zA-Z0-9]/g, '-')}`);
-            
+
         } catch (error) {
             console.error('Error loading markdown file:', error);
             this.showErrorMessage(filePath, error.message);
@@ -455,10 +461,10 @@ class TekbotDocumentation {
                 headerIds: true,
                 mangle: false
             });
-            
+
             return marked.parse(markdown);
         }
-        
+
         // Fallback simple markdown conversion
         return this.simpleMarkdownToHTML(markdown);
     }
@@ -476,7 +482,7 @@ class TekbotDocumentation {
     displayMarkdownContent(htmlContent) {
         const container = document.getElementById('markdownContainer');
         const content = document.getElementById('markdownContent');
-        
+
         if (!container || !content) return;
 
         content.innerHTML = `
@@ -487,10 +493,10 @@ class TekbotDocumentation {
 
         container.classList.add('active');
         this.hideMainContent();
-        
+
         // Initialize syntax highlighting and diagrams
         this.initializeContentFeatures();
-        
+
         // Smooth scroll to top
         container.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -507,26 +513,26 @@ class TekbotDocumentation {
 
         // Add copy buttons to code blocks
         this.addCodeCopyButtons();
-        
+
         // Add zoom functionality to images
         this.addImageZoom();
-        
+
         // Add table responsiveness
         this.makeTablesResponsive();
     }
 
     addCodeCopyButtons() {
         const codeBlocks = document.querySelectorAll('.markdown-content pre code');
-        
+
         codeBlocks.forEach(block => {
             const pre = block.parentElement;
             if (pre.querySelector('.copy-button')) return; // Already has button
-            
+
             const copyButton = document.createElement('button');
             copyButton.className = 'copy-button';
             copyButton.innerHTML = '<i class="fas fa-copy"></i>';
             copyButton.title = 'Copier le code';
-            
+
             copyButton.addEventListener('click', () => {
                 navigator.clipboard.writeText(block.textContent).then(() => {
                     copyButton.innerHTML = '<i class="fas fa-check"></i>';
@@ -535,7 +541,7 @@ class TekbotDocumentation {
                     }, 2000);
                 });
             });
-            
+
             pre.style.position = 'relative';
             pre.appendChild(copyButton);
         });
@@ -543,7 +549,7 @@ class TekbotDocumentation {
 
     addImageZoom() {
         const images = document.querySelectorAll('.markdown-content img');
-        
+
         images.forEach(img => {
             img.addEventListener('click', () => this.showImageModal(img));
             img.style.cursor = 'zoom-in';
@@ -561,9 +567,9 @@ class TekbotDocumentation {
                 </button>
             </div>
         `;
-        
+
         document.body.appendChild(modal);
-        
+
         // Add styles
         const style = document.createElement('style');
         style.textContent = `
@@ -608,9 +614,9 @@ class TekbotDocumentation {
             }
         `;
         document.head.appendChild(style);
-        
+
         setTimeout(() => modal.classList.add('active'), 10);
-        
+
         // Close handlers
         const closeModal = () => {
             modal.classList.remove('active');
@@ -619,14 +625,14 @@ class TekbotDocumentation {
                 document.head.removeChild(style);
             }, 300);
         };
-        
+
         modal.querySelector('.modal-close').addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
             if (e.target === modal || e.target.className === 'image-modal-overlay') {
                 closeModal();
             }
         });
-        
+
         document.addEventListener('keydown', function escapeHandler(e) {
             if (e.key === 'Escape') {
                 closeModal();
@@ -637,7 +643,7 @@ class TekbotDocumentation {
 
     makeTablesResponsive() {
         const tables = document.querySelectorAll('.markdown-content table');
-        
+
         tables.forEach(table => {
             if (!table.parentElement.classList.contains('table-wrapper')) {
                 const wrapper = document.createElement('div');
@@ -652,20 +658,20 @@ class TekbotDocumentation {
     showMainContent() {
         const container = document.getElementById('markdownContainer');
         const mainContent = document.getElementById('mainContent');
-        
+
         if (container) {
             container.classList.remove('active');
         }
-        
+
         if (mainContent) {
             mainContent.style.display = 'block';
         }
-        
+
         this.currentMarkdownFile = null;
-        
+
         // Update URL
         history.pushState({}, '', window.location.pathname);
-        
+
         // Update active nav item to home
         this.updateActiveNavItem(document.querySelector('a[href="#accueil"]'));
     }
@@ -692,7 +698,7 @@ class TekbotDocumentation {
     showErrorMessage(filePath, errorMessage) {
         const container = document.getElementById('markdownContainer');
         const content = document.getElementById('markdownContent');
-        
+
         if (!container || !content) return;
 
         content.innerHTML = `
@@ -719,7 +725,7 @@ class TekbotDocumentation {
         document.querySelectorAll('.nav-link.active').forEach(item => {
             item.classList.remove('active');
         });
-        
+
         // Add active class to clicked item
         if (activeElement) {
             activeElement.classList.add('active');
@@ -731,7 +737,7 @@ class TekbotDocumentation {
         if (element) {
             const headerHeight = 70; // Top nav height
             const elementPosition = element.offsetTop - headerHeight - 20;
-            
+
             window.scrollTo({
                 top: elementPosition,
                 behavior: 'smooth'
@@ -749,7 +755,7 @@ class TekbotDocumentation {
     handleScroll() {
         const scrollY = window.pageYOffset;
         const scrollTopBtn = document.getElementById('scrollTopBtn');
-        
+
         // Show/hide scroll to top button
         if (scrollTopBtn) {
             if (scrollY > 300) {
@@ -758,13 +764,13 @@ class TekbotDocumentation {
                 scrollTopBtn.classList.remove('visible');
             }
         }
-        
+
         // Parallax effect for hero background
         const heroBackground = document.querySelector('.hero-background');
         if (heroBackground && scrollY < window.innerHeight) {
             heroBackground.style.transform = `translateY(${scrollY * 0.5}px)`;
         }
-        
+
         // Update navigation based on scroll position
         this.updateScrollNavigation();
     }
@@ -772,14 +778,14 @@ class TekbotDocumentation {
     updateScrollNavigation() {
         const sections = document.querySelectorAll('.content-section');
         const scrollPosition = window.pageYOffset + 100;
-        
+
         sections.forEach(section => {
             if (section.offsetTop <= scrollPosition && 
                 (section.offsetTop + section.offsetHeight) > scrollPosition) {
-                
+
                 const sectionId = section.id;
                 const navLink = document.querySelector(`a[href="#${sectionId}"]`);
-                
+
                 if (navLink && !navLink.classList.contains('active')) {
                     this.updateActiveNavItem(navLink);
                 }
@@ -793,7 +799,7 @@ class TekbotDocumentation {
             e.preventDefault();
             this.toggleSearch();
         }
-        
+
         // Escape to close overlays
         if (e.key === 'Escape') {
             if (this.isSearchOpen) {
@@ -804,7 +810,7 @@ class TekbotDocumentation {
                 this.showMainContent();
             }
         }
-        
+
         // Arrow keys for navigation
         if (e.key === 'ArrowLeft' && e.altKey) {
             e.preventDefault();
@@ -819,7 +825,7 @@ class TekbotDocumentation {
         if (window.innerWidth > 768 && this.isSidebarOpen) {
             this.closeSidebar();
         }
-        
+
         // Recalculate animations
         this.updateAnimations();
     }
@@ -834,12 +840,12 @@ class TekbotDocumentation {
     initializeAnimations() {
         // Add entrance animations to elements
         const animatedElements = document.querySelectorAll('.hero-content > *, .content-section > *');
-        
+
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -847,21 +853,21 @@ class TekbotDocumentation {
                 }
             });
         }, observerOptions);
-        
+
         animatedElements.forEach(el => observer.observe(el));
     }
 
     setupScrollEffects() {
         // Smooth reveal animations
         const reveals = document.querySelectorAll('.team-card, .timeline-item, .highlight-item');
-        
+
         reveals.forEach((element, index) => {
             element.style.opacity = '0';
             element.style.transform = 'translateY(30px)';
             element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             element.style.transitionDelay = `${index * 0.1}s`;
         });
-        
+
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -870,14 +876,14 @@ class TekbotDocumentation {
                 }
             });
         }, { threshold: 0.1 });
-        
+
         reveals.forEach(el => revealObserver.observe(el));
     }
 
     initializeParticles() {
         const particlesContainer = document.getElementById('particles-bg');
         if (!particlesContainer) return;
-        
+
         // Create animated particles
         for (let i = 0; i < 30; i++) {
             const particle = document.createElement('div');
@@ -894,10 +900,10 @@ class TekbotDocumentation {
                 animation: float ${Math.random() * 20 + 10}s infinite ease-in-out;
                 animation-delay: ${Math.random() * 10}s;
             `;
-            
+
             particlesContainer.appendChild(particle);
         }
-        
+
         // Add CSS for particle animation
         if (!document.querySelector('#particle-styles')) {
             const style = document.createElement('style');
@@ -921,7 +927,7 @@ class TekbotDocumentation {
     setupIntersectionObservers() {
         // Observe sections for active navigation updates
         const sections = document.querySelectorAll('.content-section');
-        
+
         const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -936,7 +942,7 @@ class TekbotDocumentation {
             threshold: 0.3,
             rootMargin: '-100px 0px -100px 0px'
         });
-        
+
         sections.forEach(section => sectionObserver.observe(section));
     }
 
@@ -944,7 +950,7 @@ class TekbotDocumentation {
         // Update animations based on viewport
         const viewportWidth = window.innerWidth;
         const animations = document.querySelectorAll('[style*="animation"]');
-        
+
         animations.forEach(element => {
             if (viewportWidth < 768) {
                 // Reduce animations on mobile
@@ -975,7 +981,7 @@ class TekbotDocumentation {
     removeLoadingScreen() {
         const loadingScreen = document.getElementById('loading-screen');
         const body = document.body;
-        
+
         if (loadingScreen) {
             loadingScreen.style.opacity = '0';
             setTimeout(() => {
@@ -983,6 +989,33 @@ class TekbotDocumentation {
                 body.classList.remove('loading');
                 body.classList.add('loaded');
             }, 500);
+        }
+    }
+
+    // Helper function to update elements that have theme-specific styles
+    updateThemeSpecificElements() {
+        const elementsToUpdate = document.querySelectorAll('.theme-background, .theme-text, .theme-border');
+        elementsToUpdate.forEach(el => {
+            if (this.currentTheme === 'dark') {
+                el.classList.add('dark');
+                el.classList.remove('light');
+            } else {
+                el.classList.add('light');
+                el.classList.remove('dark');
+            }
+        });
+
+        // Specific adjustments for problematic elements if identified
+        // Example: If a specific element needs a background color change on dark mode
+        const specialElement = document.getElementById('specialElementId');
+        if (specialElement) {
+            if (this.currentTheme === 'dark') {
+                specialElement.style.backgroundColor = '#333'; // Darker background
+                specialElement.style.color = '#fff'; // White text
+            } else {
+                specialElement.style.backgroundColor = '#f0f0f0'; // Lighter background
+                specialElement.style.color = '#333'; // Darker text
+            }
         }
     }
 }

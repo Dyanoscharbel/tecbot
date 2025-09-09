@@ -76,22 +76,22 @@
 
 /* Dark Theme Variables */
 .dark-theme {
-    --white: #111827;
-    --gray-50: #1f2937;
-    --gray-100: #374151;
-    --gray-200: #4b5563;
-    --gray-300: #6b7280;
-    --gray-400: #9ca3af;
-    --gray-500: #d1d5db;
-    --gray-600: #e5e7eb;
-    --gray-700: #f3f4f6;
-    --gray-800: #f9fafb;
+    --white: #0f172a;
+    --gray-50: #1e293b;
+    --gray-100: #334155;
+    --gray-200: #475569;
+    --gray-300: #64748b;
+    --gray-400: #94a3b8;
+    --gray-500: #cbd5e1;
+    --gray-600: #e2e8f0;
+    --gray-700: #f1f5f9;
+    --gray-800: #f8fafc;
     --gray-900: #ffffff;
     --black: #ffffff;
     
-    --glass: rgba(0, 0, 0, 0.2);
+    --glass: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-dark: rgba(255, 255, 255, 0.05);
+    --glass-dark: rgba(0, 0, 0, 0.3);
 }
 
 /* Reset & Base Styles */
@@ -113,6 +113,10 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     transition: var(--transition);
+}
+
+.dark-theme body {
+    background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
 }
 
 /* Loading Screen */
@@ -223,6 +227,11 @@ body.loaded .loading-screen {
     transition: var(--transition);
 }
 
+.dark-theme .top-nav {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .nav-brand {
     display: flex;
     align-items: center;
@@ -258,6 +267,11 @@ body.loaded .loading-screen {
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
+}
+
+.dark-theme .control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--gray-300);
 }
 
 .control-btn:hover {
@@ -396,6 +410,11 @@ body.loaded .loading-screen {
     transition: var(--transition-slow);
     z-index: 900;
     padding: var(--space-xl);
+}
+
+.dark-theme .sidebar {
+    background: rgba(15, 23, 42, 0.95);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sidebar.active {
@@ -573,12 +592,16 @@ body.loaded .loading-screen {
     display: flex;
     align-items: center;
     padding: var(--space-lg);
-    background: white;
+    background: var(--white);
     border-radius: var(--radius-lg);
     cursor: pointer;
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
     margin-bottom: var(--space-md);
+}
+
+.dark-theme .domain-toggle {
+    background: var(--gray-100);
 }
 
 .domain-toggle:hover {
@@ -670,7 +693,12 @@ body.loaded .loading-screen {
     margin-bottom: var(--space-sm);
     transition: var(--transition);
     position: relative;
-    background: white;
+    background: var(--white);
+}
+
+.dark-theme .content-link {
+    background: var(--gray-200);
+    color: var(--gray-800);
 }
 
 .content-link:hover {
@@ -1147,7 +1175,7 @@ body.loaded .loading-screen {
 }
 
 .team-card {
-    background: white;
+    background: var(--white);
     border-radius: var(--radius-2xl);
     padding: var(--space-2xl);
     box-shadow: var(--shadow);
@@ -1155,6 +1183,11 @@ body.loaded .loading-screen {
     border-top: 4px solid transparent;
     position: relative;
     overflow: hidden;
+}
+
+.dark-theme .team-card {
+    background: var(--gray-100);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
 }
 
 .team-card::before {
@@ -1365,11 +1398,15 @@ body.loaded .loading-screen {
     left: 0;
     width: 100%;
     height: calc(100vh - 70px);
-    background: white;
+    background: var(--white);
     z-index: 800;
     transform: translateX(100%);
     transition: var(--transition-slow);
     overflow-y: auto;
+}
+
+.dark-theme .markdown-container {
+    background: var(--gray-50);
 }
 
 .markdown-container.active {
@@ -1387,6 +1424,11 @@ body.loaded .loading-screen {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+}
+
+.dark-theme .markdown-header {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid var(--gray-300);
 }
 
 .back-button {
