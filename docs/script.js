@@ -432,7 +432,7 @@ class TekbotDocumentation {
         } else {
             element.style.maxHeight = element.scrollHeight + 'px';
             setTimeout(() => {
-                element.style.maxHeight = '500px';
+                element.style.maxHeight = '800px';
             }, 500);
         }
     }
