@@ -1005,17 +1005,77 @@ class TekbotDocumentation {
             }
         });
 
-        // Specific adjustments for problematic elements if identified
-        // Example: If a specific element needs a background color change on dark mode
-        const specialElement = document.getElementById('specialElementId');
-        if (specialElement) {
+        // Force une re-application des styles CSS
+        document.body.style.display = 'none';
+        document.body.offsetHeight; // Force reflow
+        document.body.style.display = '';
+
+        // Mettre à jour les éléments de navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
             if (this.currentTheme === 'dark') {
-                specialElement.style.backgroundColor = '#333'; // Darker background
-                specialElement.style.color = '#fff'; // White text
+                link.style.color = '#e2e8f0';
             } else {
-                specialElement.style.backgroundColor = '#f0f0f0'; // Lighter background
-                specialElement.style.color = '#333'; // Darker text
+                link.style.color = '';
             }
+        });
+
+        // Mettre à jour les cartes d'équipe
+        const teamCards = document.querySelectorAll('.team-card');
+        teamCards.forEach(card => {
+            if (this.currentTheme === 'dark') {
+                card.style.backgroundColor = '#1e293b';
+                card.style.color = '#f1f5f9';
+            } else {
+                card.style.backgroundColor = '';
+                card.style.color = '';
+            }
+        });
+
+        // Mettre à jour les sections de contenu
+        const contentSections = document.querySelectorAll('.content-section');
+        contentSections.forEach(section => {
+            if (this.currentTheme === 'dark') {
+                section.style.color = '#f1f5f9';
+            } else {
+                section.style.color = '';
+            }
+        });
+
+        // Mettre à jour les titres
+        const titles = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        titles.forEach(title => {
+            if (this.currentTheme === 'dark') {
+                title.style.color = '#ffffff';
+            } else {
+                title.style.color = '';
+            }
+        });
+
+        // Mettre à jour les paragraphes
+        const paragraphs = document.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            if (this.currentTheme === 'dark') {
+                if (!p.closest('.cta-button') && !p.closest('.nav-link')) {
+                    p.style.color = '#e2e8f0';
+                }
+            } else {
+                p.style.color = '';
+            }
+        });
+
+        // Forcer la mise à jour des variables CSS
+        const root = document.documentElement;
+        if (this.currentTheme === 'dark') {
+            root.style.setProperty('--text-primary', '#ffffff');
+            root.style.setProperty('--text-secondary', '#e2e8f0');
+            root.style.setProperty('--bg-primary', '#0f172a');
+            root.style.setProperty('--bg-secondary', '#1e293b');
+        } else {
+            root.style.removeProperty('--text-primary');
+            root.style.removeProperty('--text-secondary');
+            root.style.removeProperty('--bg-primary');
+            root.style.removeProperty('--bg-secondary');
         }
     }
 }
