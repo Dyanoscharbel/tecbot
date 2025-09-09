@@ -38,22 +38,34 @@ class TekbotDocumentation {
     }
 
     setupEventListeners() {
-        // Theme toggle
+        // Theme toggle avec animation
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle) {
-            themeToggle.addEventListener('click', () => this.toggleTheme());
+            themeToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.animateButton(themeToggle);
+                this.toggleTheme();
+            });
         }
 
-        // Menu toggle
+        // Menu toggle avec animation
         const menuToggle = document.getElementById('menuToggle');
         if (menuToggle) {
-            menuToggle.addEventListener('click', () => this.toggleSidebar());
+            menuToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.animateButton(menuToggle);
+                this.toggleSidebar();
+            });
         }
 
-        // Search toggle
+        // Search toggle avec animation
         const searchToggle = document.getElementById('searchToggle');
         if (searchToggle) {
-            searchToggle.addEventListener('click', () => this.toggleSearch());
+            searchToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.animateButton(searchToggle);
+                this.toggleSearch();
+            });
         }
 
         // Search functionality
@@ -994,8 +1006,24 @@ class TekbotDocumentation {
 
     // Helper function to update elements that have theme-specific styles
     updateThemeSpecificElements() {
-        const elementsToUpdate = document.querySelectorAll('.theme-background, .theme-text, .theme-border');
-        elementsToUpdate.forEach(el => {
+        // Vérification de sécurité pour éviter les erreurs null
+        const safeQueryAndUpdate = (selector, updateFn) => {
+            try {
+                const elements = document.querySelectorAll(selector);
+                if (elements && elements.length > 0) {
+                    elements.forEach(el => {
+                        if (el && el.classList) {
+                            updateFn(el);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.warn(`Error updating elements with selector ${selector}:`, error);
+            }
+        };
+
+        // Mettre à jour les éléments thématiques de base
+        safeQueryAndUpdate('.theme-background, .theme-text, .theme-border', (el) => {
             if (this.currentTheme === 'dark') {
                 el.classList.add('dark');
                 el.classList.remove('light');
@@ -1006,13 +1034,25 @@ class TekbotDocumentation {
         });
 
         // Force une re-application des styles CSS
-        document.body.style.display = 'none';
-        document.body.offsetHeight; // Force reflow
-        document.body.style.display = '';
+        requestAnimationFrame(() => {
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // Force reflow
+            document.body.style.display = '';
+        });
+
+        // Mettre à jour les boutons de contrôle
+        safeQueryAndUpdate('.control-btn', (btn) => {
+            if (this.currentTheme === 'dark') {
+                btn.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                btn.style.color = '#e2e8f0';
+            } else {
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
+            }
+        });
 
         // Mettre à jour les éléments de navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        navLinks.forEach(link => {
+        safeQueryAndUpdate('.nav-link', (link) => {
             if (this.currentTheme === 'dark') {
                 link.style.color = '#e2e8f0';
             } else {
@@ -1020,9 +1060,44 @@ class TekbotDocumentation {
             }
         });
 
+        // Mettre à jour la sidebar
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) {
+            if (this.currentTheme === 'dark') {
+                sidebar.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+                sidebar.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+            } else {
+                sidebar.style.backgroundColor = '';
+                sidebar.style.borderColor = '';
+            }
+        }
+
+        // Mettre à jour les boutons toggle domain
+        safeQueryAndUpdate('.domain-toggle', (toggle) => {
+            if (this.currentTheme === 'dark') {
+                toggle.style.backgroundColor = '#334155';
+                toggle.style.color = '#f1f5f9';
+            } else {
+                toggle.style.backgroundColor = '';
+                toggle.style.color = '';
+            }
+        });
+
+        // Mettre à jour les boutons CTA
+        safeQueryAndUpdate('.cta-button.secondary', (btn) => {
+            if (this.currentTheme === 'dark') {
+                btn.style.backgroundColor = '#334155';
+                btn.style.borderColor = '#475569';
+                btn.style.color = '#e2e8f0';
+            } else {
+                btn.style.backgroundColor = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }
+        });
+
         // Mettre à jour les cartes d'équipe
-        const teamCards = document.querySelectorAll('.team-card');
-        teamCards.forEach(card => {
+        safeQueryAndUpdate('.team-card', (card) => {
             if (this.currentTheme === 'dark') {
                 card.style.backgroundColor = '#1e293b';
                 card.style.color = '#f1f5f9';
@@ -1033,8 +1108,7 @@ class TekbotDocumentation {
         });
 
         // Mettre à jour les sections de contenu
-        const contentSections = document.querySelectorAll('.content-section');
-        contentSections.forEach(section => {
+        safeQueryAndUpdate('.content-section', (section) => {
             if (this.currentTheme === 'dark') {
                 section.style.color = '#f1f5f9';
             } else {
@@ -1043,24 +1117,45 @@ class TekbotDocumentation {
         });
 
         // Mettre à jour les titres
-        const titles = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-        titles.forEach(title => {
+        safeQueryAndUpdate('h1, h2, h3, h4, h5, h6', (title) => {
             if (this.currentTheme === 'dark') {
-                title.style.color = '#ffffff';
+                if (!title.closest('.cta-button')) {
+                    title.style.color = '#ffffff';
+                }
             } else {
                 title.style.color = '';
             }
         });
 
         // Mettre à jour les paragraphes
-        const paragraphs = document.querySelectorAll('p');
-        paragraphs.forEach(p => {
+        safeQueryAndUpdate('p', (p) => {
             if (this.currentTheme === 'dark') {
                 if (!p.closest('.cta-button') && !p.closest('.nav-link')) {
                     p.style.color = '#e2e8f0';
                 }
             } else {
                 p.style.color = '';
+            }
+        });
+
+        // Mettre à jour le bouton FAB
+        const fab = document.getElementById('scrollTopBtn');
+        if (fab) {
+            if (this.currentTheme === 'dark') {
+                fab.style.backgroundColor = '#4f46e5';
+            } else {
+                fab.style.backgroundColor = '';
+            }
+        }
+
+        // Mettre à jour les boutons d'actions
+        safeQueryAndUpdate('.action-btn', (btn) => {
+            if (this.currentTheme === 'dark') {
+                btn.style.backgroundColor = '#334155';
+                btn.style.color = '#e2e8f0';
+            } else {
+                btn.style.backgroundColor = '';
+                btn.style.color = '';
             }
         });
 
@@ -1071,11 +1166,15 @@ class TekbotDocumentation {
             root.style.setProperty('--text-secondary', '#e2e8f0');
             root.style.setProperty('--bg-primary', '#0f172a');
             root.style.setProperty('--bg-secondary', '#1e293b');
+            root.style.setProperty('--control-bg', 'rgba(255, 255, 255, 0.1)');
+            root.style.setProperty('--control-color', '#e2e8f0');
         } else {
             root.style.removeProperty('--text-primary');
             root.style.removeProperty('--text-secondary');
             root.style.removeProperty('--bg-primary');
             root.style.removeProperty('--bg-secondary');
+            root.style.removeProperty('--control-bg');
+            root.style.removeProperty('--control-color');
         }
     }
 }

@@ -476,17 +476,49 @@ body.loaded .loading-screen {
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .dark-theme .control-btn {
     background: rgba(255, 255, 255, 0.1);
-    color: var(--gray-300);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .control-btn:hover {
     background: var(--primary);
     color: white;
     transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.dark-theme .control-btn:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.control-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.control-btn:active::before {
+    width: 100px;
+    height: 100px;
 }
 
 /* Search Overlay */
@@ -619,15 +651,40 @@ body.loaded .loading-screen {
     transition: var(--transition-slow);
     z-index: 900;
     padding: var(--space-xl);
+    box-shadow: var(--shadow-lg);
 }
 
 .dark-theme .sidebar {
-    background: rgba(15, 23, 42, 0.95);
+    background: rgba(15, 23, 42, 0.96);
     border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar.active {
     left: 0;
+    transform: translateX(0);
+}
+
+.sidebar:not(.active) {
+    transform: translateX(-100%);
+}
+
+/* Scrollbar pour sidebar en mode sombre */
+.dark-theme .sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dark-theme .sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+.dark-theme .sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .sidebar-header {
@@ -807,15 +864,46 @@ body.loaded .loading-screen {
     transition: var(--transition);
     box-shadow: var(--shadow-sm);
     margin-bottom: var(--space-md);
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
 }
 
 .dark-theme .domain-toggle {
-    background: var(--gray-100);
+    background: #334155;
+    color: #f1f5f9;
+    border-color: #475569;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .domain-toggle:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
+}
+
+.dark-theme .domain-toggle:hover {
+    background: #475569;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    border-color: #64748b;
+}
+
+.domain-toggle:active {
+    transform: translateY(0);
+}
+
+.domain-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.domain-toggle:hover::before {
+    left: 100%;
 }
 
 .domain-icon {
