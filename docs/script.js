@@ -1012,7 +1012,7 @@ class TekbotDocumentation {
                 const elements = document.querySelectorAll(selector);
                 if (elements && elements.length > 0) {
                     elements.forEach(el => {
-                        if (el && el.classList) {
+                        if (el && el.classList && typeof updateFn === 'function') {
                             updateFn(el);
                         }
                     });
@@ -1022,14 +1022,24 @@ class TekbotDocumentation {
             }
         };
 
+        // Vérification spéciale pour les éléments null
+        const checkAndUpdate = (selector, updateFn) => {
+            const element = document.querySelector(selector);
+            if (element && element.classList && typeof updateFn === 'function') {
+                updateFn(element);
+            }
+        };
+
         // Mettre à jour les éléments thématiques de base
         safeQueryAndUpdate('.theme-background, .theme-text, .theme-border', (el) => {
-            if (this.currentTheme === 'dark') {
-                el.classList.add('dark');
-                el.classList.remove('light');
-            } else {
-                el.classList.add('light');
-                el.classList.remove('dark');
+            if (el && el.classList) {
+                if (this.currentTheme === 'dark') {
+                    el.classList.add('dark');
+                    el.classList.remove('light');
+                } else {
+                    el.classList.add('light');
+                    el.classList.remove('dark');
+                }
             }
         });
 

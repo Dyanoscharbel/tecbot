@@ -801,6 +801,19 @@ body.loaded .loading-screen {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-style: normal;
+    font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Pro', sans-serif;
+}
+
+/* Fallback pour les icônes manquantes */
+.nav-icon i:empty:before {
+    content: "📄";
+    font-family: sans-serif;
+}
+
+.domain-icon i:empty:before {
+    content: "⚡";
+    font-family: sans-serif;
 }
 
 .nav-link.active .nav-icon {
@@ -966,6 +979,33 @@ body.loaded .loading-screen {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-style: normal;
+    font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Pro', sans-serif;
+}
+
+/* Icônes spécifiques par domaine avec fallbacks */
+.domain-icon.electronique i:empty:before {
+    content: "⚡";
+    font-family: sans-serif;
+    font-size: 1.2em;
+}
+
+.domain-icon.informatique i:empty:before {
+    content: "💻";
+    font-family: sans-serif;
+    font-size: 1.2em;
+}
+
+.domain-icon.mecanique i:empty:before {
+    content: "⚙️";
+    font-family: sans-serif;
+    font-size: 1.2em;
+}
+
+.domain-icon.final i:empty:before {
+    content: "🏆";
+    font-family: sans-serif;
+    font-size: 1.2em;
 }
 
 .domain-icon.electronique {
